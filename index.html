@@ -259,22 +259,22 @@ tbody tr:hover { background: #fafcfb; }
 <div class="group"><h3>Receita e ramp-up</h3>
 <div class="field"><label>Ticket médio</label><div class="input-wrap"><span>R$</span><input id="ticket" type="number" value="35" step="0.5"></div></div>
 <div class="field"><label>Dias de operação/mês</label><div class="input-wrap"><input id="days" type="number" value="26" min="1" max="31"></div></div>
-<div class="field"><label>Pedidos/dia no M1</label><div class="input-wrap"><input id="orders1" type="number" value="20"></div></div>
-<div class="field"><label>Pedidos/dia no M6</label><div class="input-wrap"><input id="orders6" type="number" value="154"></div></div>
-<div class="field"><label>Pedidos/dia estabilizado</label><div class="input-wrap"><input id="ordersStable" type="number" value="200"></div></div>
-<div class="field"><label>Mês de estabilização</label><div class="input-wrap"><input id="stableMonth" type="number" value="8" min="2" max="36"></div></div>
+<div class="field"><label>Pedidos/dia no M1</label><div class="input-wrap"><input id="orders1" type="number" value="90"></div></div>
+<div class="field"><label>Pedidos/dia no M6</label><div class="input-wrap"><input id="orders6" type="number" value="120"></div></div>
+<div class="field"><label>Pedidos/dia estabilizado</label><div class="input-wrap"><input id="ordersStable" type="number" value="170"></div></div>
+<div class="field"><label>Mês de estabilização</label><div class="input-wrap"><input id="stableMonth" type="number" value="8" min="7" max="36"></div></div>
 <div class="field"><label>Crescimento anual após estabilização</label><div class="input-wrap"><input class="pct" id="growth" type="number" value="0" step="0.5"><span class="suffix">%</span></div></div>
 </div>
 <div class="group"><h3>Custos variáveis</h3>
 <div class="field"><label>Ingredientes e embalagens</label><div class="input-wrap"><input class="pct" id="cmv" type="number" value="32" step="0.5"><span class="suffix">%</span></div></div>
 <div class="field"><label>Impostos sobre vendas</label><div class="input-wrap"><input class="pct" id="tax" type="number" value="8" step="0.5"><span class="suffix">%</span></div></div>
 <div class="field"><label>Royalties</label><div class="input-wrap"><input class="pct" id="royalties" type="number" value="6" step="0.5"><span class="suffix">%</span></div></div>
-<div class="field"><label>Fundo cooperado marketing</label><div class="input-wrap"><input class="pct" id="marketing" type="number" value="3" step="0.5"><span class="suffix">%</span></div></div>
+<div class="field"><label>Fundo cooperado marketing</label><div class="input-wrap"><input class="pct" id="marketing" type="number" value="1" step="0.5"><span class="suffix">%</span></div></div>
 <div class="field"><label>Marketing local adicional</label><div class="input-wrap"><input class="pct" id="localMarketing" type="number" value="1" step="0.5"><span class="suffix">%</span></div></div>
 <div class="field"><label>Pagamentos e delivery</label><div class="input-wrap"><input class="pct" id="payment" type="number" value="3" step="0.5"><span class="suffix">%</span></div></div>
 </div>
 <div class="group"><h3>Despesas fixas mensais</h3>
-<div class="field"><label>Quantidade de funcionários</label><div class="input-wrap"><input id="employees" type="number" value="7" min="0" max="100" step="1"></div></div>
+<div class="field"><label>Quantidade de funcionários</label><div class="input-wrap"><input id="employees" type="number" value="5" min="0" max="100" step="1"></div></div>
 <div class="field"><label>Salário-base por funcionário</label><div class="input-wrap"><span>R$</span><input id="salary" type="number" value="2500" step="100"></div></div>
 <div class="field"><label>Alimentação/refeição por funcionário</label><div class="input-wrap"><span>R$</span><input id="meal" type="number" value="600" step="50"></div></div>
 <div class="field"><label>Seguro mensal por funcionário</label><div class="input-wrap"><span>R$</span><input id="insurance" type="number" value="30" step="10"></div></div>
@@ -283,14 +283,14 @@ tbody tr:hover { background: #fafcfb; }
 <div class="field"><label>Encargos e provisões sobre salário</label><div class="input-wrap"><input class="pct" id="laborBurden" type="number" value="56.8" step="0.5"><span class="suffix">%</span></div></div>
 <div class="field"><label>Desconto do funcionário no VT</label><div class="input-wrap"><input class="pct" id="vtDiscount" type="number" value="0" min="0" max="6" step="1"><span class="suffix">%</span></div></div>
 <div class="note" id="laborSummary" style="margin:12px 0"></div>
-<div class="field"><label>Pró-labore mensal</label><div class="input-wrap"><span>R$</span><input id="proLabore" type="number" value="8000" step="500"></div></div>
-<div class="field"><label>Parcela mensal de financiamento</label><div class="input-wrap"><span>R$</span><input id="financingPayment" type="number" value="5000" step="500"></div></div>
-<div class="field"><label>Prazo do financiamento</label><div class="input-wrap"><input id="financingMonths" type="number" value="60" min="0" max="120" step="1"><span class="suffix">meses</span></div></div>
+<div class="field"><label>Pró-labore mensal</label><div class="input-wrap"><span>R$</span><input id="proLabore" type="number" value="5000" step="500"></div></div>
+<div class="field"><label>Parcela mensal de financiamento</label><div class="input-wrap"><span>R$</span><input id="financingPayment" type="number" value="9000" step="500"></div></div>
+<div class="field"><label>Prazo do financiamento</label><div class="input-wrap"><input id="financingMonths" type="number" value="48" min="0" max="120" step="1"><span class="suffix">meses</span></div></div>
 <div class="field"><label>Aluguel base</label><div class="input-wrap"><span>R$</span><input id="rent" type="number" value="7000" step="500"></div></div>
-<div class="field"><label>Condomínio, fundo e IPTU</label><div class="input-wrap"><span>R$</span><input id="occupancyExtra" type="number" value="0" step="500"></div></div>
-<div class="field"><label>Utilidades, manutenção e adm.</label><div class="input-wrap"><span>R$</span><input id="admin" type="number" value="8000" step="500"></div></div>
-<div class="field"><label>Seguro, sistema e outros</label><div class="input-wrap"><span>R$</span><input id="otherFixed" type="number" value="0" step="500"></div></div>
-<div class="field"><label>Reajuste anual dos custos fixos</label><div class="input-wrap"><input class="pct" id="fixedInflation" type="number" value="0" step="0.5"><span class="suffix">%</span></div></div>
+<div class="field"><label>Condomínio, fundo e IPTU</label><div class="input-wrap"><span>R$</span><input id="occupancyExtra" type="number" value="500" step="500"></div></div>
+<div class="field"><label>Utilidades, manutenção e adm.</label><div class="input-wrap"><span>R$</span><input id="admin" type="number" value="5000" step="500"></div></div>
+<div class="field"><label>Seguro, sistema e outros</label><div class="input-wrap"><span>R$</span><input id="otherFixed" type="number" value="300" step="500"></div></div>
+<div class="field"><label>Reajuste anual dos custos fixos</label><div class="input-wrap"><input class="pct" id="fixedInflation" type="number" value="3.5" step="0.5"><span class="suffix">%</span></div></div>
 </div>
 <div class="actions">
 <button class="primary" onclick="calculate()">Recalcular</button>
@@ -308,7 +308,7 @@ tbody tr:hover { background: #fafcfb; }
 <div class="card"><h2>Fluxo de caixa mensal</h2><p class="sub">Barras representam o caixa livre após despesas operacionais, pró-labore e parcelas do financiamento, incluindo o desembolso inicial no mês zero.</p><div class="chart" id="cashChart"></div><div class="axisnote">Passe o cursor sobre uma barra para ver o mês e o valor.</div></div>
 <div class="card"><h2>Validação econômica</h2><p class="sub">Sinalização baseada nos indicadores calculados.</p><div id="validation"></div></div>
 </div>
-<div class="card"><h2>Dimensionamento recomendado da equipe</h2><p class="sub">Estrutura-base para loja de shopping de 40 m², operação 5x2, 26 dias/mês e capacidade projetada de até 200 pedidos/dia. A quantidade total permanece editável nas premissas.</p>
+<div class="card"><h2>Referência de dimensionamento da equipe</h2><p class="sub">A composição abaixo é uma referência operacional para loja de shopping de 40 m², operação 5x2 e até 200 pedidos/dia. O cenário financeiro inicial desta versão considera 5 funcionários; a distribuição por cargo abaixo continua sendo uma referência separada e pode ser ajustada conforme a operação.</p>
 <div class="table-wrap" style="max-height:none"><table><thead><tr><th>Cargo</th><th>Quantidade-base</th><th>Responsabilidade principal</th></tr></thead><tbody>
 <tr><td>Gerente / líder de loja</td><td>1</td><td>Gestão, abertura e fechamento, estoque, escala, controles e apoio nos picos</td></tr>
 <tr><td>Auxiliar de cozinha / produção</td><td>3</td><td>Pré-preparo, produção, montagem, reposição e higiene da cozinha</td></tr>
@@ -323,7 +323,7 @@ tbody tr:hover { background: #fafcfb; }
 <div class="kpi"><div class="label">Custo atual da equipe</div><div class="value" id="staffingCardCost">R$ 0</div><div class="hint" id="staffingCardHint">Calculado automaticamente</div></div>
 </div>
 <div class="note" style="margin-top:14px"><strong>Observação:</strong> a composição por cargo é a recomendação operacional do cenário-base. Ao alterar a quantidade total de funcionários, o custo financeiro é recalculado automaticamente, mas a redistribuição dos cargos deve ser ajustada manualmente conforme horário do shopping, picos de almoço/jantar e convenção coletiva aplicável.</div></div>
-<div class="card"><h2>DRE anual projetada</h2><p class="sub">Visão operacional. Não contempla depreciação, juros segregados ou IR/CSLL sobre o lucro. As parcelas do financiamento são apresentadas abaixo do EBITDA para formar o caixa livre.</p><div class="table-wrap"><table><thead><tr><th>Conta</th><th>Ano 1</th><th>Ano 2</th><th>Ano 3</th><th>Ano 4</th><th>Ano 5</th></tr></thead><tbody id="dreBody"></tbody></table></div></div>
+<div class="card"><h2>DRE anual projetada</h2><p class="sub">Visão operacional. Não contempla depreciação, juros segregados ou IR/CSLL sobre o lucro. As parcelas do financiamento são apresentadas abaixo do EBITDA para formar o caixa livre.</p><div class="table-wrap"><table><thead><tr id="dreHead"><th>Conta</th></tr></thead><tbody id="dreBody"></tbody></table></div></div>
 <div class="card"><h2>Projeção mensal</h2><p class="sub">Detalhamento de volume, receita, margem de contribuição, despesas fixas e fluxo de caixa.</p><div class="table-wrap"><table><thead><tr><th>Mês</th><th>Pedidos/dia</th><th>Receita</th><th>Custos variáveis</th><th>Margem contribuição</th><th>Despesas fixas</th><th>EBITDA</th><th>Parcela financiamento</th><th>Caixa livre</th><th>Caixa acumulado</th></tr></thead><tbody id="monthlyBody"></tbody></table></div></div>
 <div class="card"><h2>Resumo dos indicadores financeiros</h2><div class="table-wrap"><table><thead><tr><th>Indicador</th><th>Resultado</th><th>Critério / interpretação</th></tr></thead><tbody id="summaryBody"></tbody></table></div>
 <div class="note" style="margin-top:14px"><strong>Critério do modelo:</strong> VPL descontado pelo WACC; TIR calculada sobre os fluxos mensais e anualizada; MTIR usa o WACC tanto como taxa de financiamento quanto como taxa de reinvestimento; payback simples usa fluxo nominal e payback descontado usa fluxo trazido a valor presente. Caso o retorno não aconteça dentro do horizonte, o indicador mostra "Não atingido".</div></div>
@@ -331,7 +331,7 @@ tbody tr:hover { background: #fafcfb; }
 </section></div></main>
 <script>
 const STORAGE_KEY='boali_bp_config_v1';
-const defaults={capex:362000,workingCapital:30000,wacc:18,months:60,residual:0,wcRecovery:0,ticket:35,days:26,orders1:20,orders6:154,ordersStable:200,stableMonth:8,growth:0,cmv:32,tax:8,royalties:6,marketing:3,localMarketing:1,payment:3,employees:7,salary:2500,meal:600,insurance:30,transportDay:8,transportDays:26,laborBurden:56.8,vtDiscount:0,proLabore:8000,financingPayment:5000,financingMonths:60,rent:7000,occupancyExtra:0,admin:8000,otherFixed:0,fixedInflation:0};
+const defaults={capex:362000,workingCapital:30000,wacc:18,months:60,residual:0,wcRecovery:0,ticket:35,days:26,orders1:90,orders6:120,ordersStable:170,stableMonth:8,growth:0,cmv:32,tax:8,royalties:6,marketing:1,localMarketing:1,payment:3,employees:5,salary:2500,meal:600,insurance:30,transportDay:8,transportDays:26,laborBurden:56.8,vtDiscount:0,proLabore:5000,financingPayment:9000,financingMonths:48,rent:7000,occupancyExtra:500,admin:5000,otherFixed:300,fixedInflation:3.5};
 const ids=Object.keys(defaults);
 const n=id=>Number(document.getElementById(id).value)||0;
 const pct=id=>n(id)/100;
@@ -343,7 +343,7 @@ function npv(rate,flows){return flows.reduce((a,v,i)=>a+v/Math.pow(1+rate,i),0)}
 function irr(flows){let lo=-.9999,hi=10; if(!flows.some(x=>x<0)||!flows.some(x=>x>0))return NaN; let fLo=npv(lo,flows),fHi=npv(hi,flows); if(fLo*fHi>0)return NaN; for(let i=0;i<250;i++){let mid=(lo+hi)/2,f=npv(mid,flows); if(Math.abs(f)<1e-8)return mid;if(fLo*f<=0){hi=mid;fHi=f}else{lo=mid;fLo=f}}return(lo+hi)/2}
 function mirr(flows,finance,reinvest){const N=flows.length-1;let pvNeg=0,fvPos=0;flows.forEach((v,i)=>{if(v<0)pvNeg+=v/Math.pow(1+finance,i);else fvPos+=v*Math.pow(1+reinvest,N-i)});if(pvNeg===0||fvPos<=0)return NaN;return Math.pow(fvPos/-pvNeg,1/N)-1}
 function payback(flows,discount=0){let cum=0;for(let i=0;i<flows.length;i++){let f=flows[i]/Math.pow(1+discount,i),prev=cum;cum+=f;if(cum>=0&&i>0){let frac=(-prev)/(f||1);return(i-1)+Math.max(0,Math.min(1,frac))}}return NaN}
-function orderRamp(m){const a=n('orders1'),b=n('orders6'),c=n('ordersStable'),sm=Math.max(7,n('stableMonth'));if(m<=1)return a;if(m<=6)return a+(b-a)*(m-1)/5;if(m<sm)return b+(c-b)*(m-6)/(sm-6);let annual=Math.floor((m-sm)/12);return c*Math.pow(1+pct('growth'),annual)}
+function orderRamp(m){const a=n('orders1'),b=n('orders6'),c=n('ordersStable'),sm=Math.min(36,Math.max(7,Math.round(n('stableMonth'))));if(m<=1)return a;if(m<=6)return a+(b-a)*(m-1)/5;if(m<sm)return b+(c-b)*(m-6)/(sm-6);let annual=Math.floor((m-sm)/12);return c*Math.pow(1+pct('growth'),annual)}
 
 function loadConfig(){
   try{
@@ -382,7 +382,7 @@ function showSaveStatus(msg,type){
 function exportConfig(){
   const cfg={};
   ids.forEach(id=>{cfg[id]=document.getElementById(id).value;});
-  cfg._meta={exportedAt:new Date().toISOString(),version:'7.0'};
+  cfg._meta={exportedAt:new Date().toISOString(),version:'8.0'};
   const blob=new Blob([JSON.stringify(cfg,null,2)],{type:'application/json'});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');
@@ -422,24 +422,24 @@ function resetModel(){
 }
 
 function calculate(){
-  const M=Math.max(12,Math.round(n('months'))),annualW=pct('wacc'),monthlyW=Math.pow(1+annualW,1/12)-1;
+  const M=Math.min(120,Math.max(12,Math.round(n('months')))),annualW=pct('wacc'),monthlyW=Math.pow(1+annualW,1/12)-1;
   const varRate=['cmv','tax','royalties','marketing','localMarketing','payment'].reduce((a,x)=>a+pct(x),0),mcRate=1-varRate;
   const grossVT=n('transportDay')*n('transportDays'),vtEmployee=Math.min(grossVT,n('salary')*pct('vtDiscount')),employerVT=Math.max(0,grossVT-vtEmployee),laborPerEmployee=n('salary')*(1+pct('laborBurden'))+n('meal')+n('insurance')+employerVT,totalPayroll=n('employees')*laborPerEmployee;
   const initial=-(n('capex')+n('workingCapital'));let flows=[initial],disc=[initial],rows=[],cum=initial;
   for(let m=1;m<=M;m++){let orders=orderRamp(m),rev=orders*n('ticket')*n('days'),variable=rev*varRate,year=Math.floor((m-1)/12),fixed=(totalPayroll+n('proLabore')+n('rent')+n('occupancyExtra')+n('admin')+n('otherFixed'))*Math.pow(1+pct('fixedInflation'),year),ebitda=rev-variable-fixed,financing=m<=n('financingMonths')?n('financingPayment'):0,freeCash=ebitda-financing;if(m===M)freeCash+=n('residual')+n('workingCapital')*pct('wcRecovery');flows.push(freeCash);disc.push(freeCash/Math.pow(1+monthlyW,m));cum+=freeCash;rows.push({m,orders,rev,variable,mc:rev-variable,fixed,ebitda,financing,freeCash,cum})}
   const monthlyIRR=irr(flows),annualIRR=isFinite(monthlyIRR)?Math.pow(1+monthlyIRR,12)-1:NaN,monthlyMIRR=mirr(flows,monthlyW,monthlyW),annualMIRR=isFinite(monthlyMIRR)?Math.pow(1+monthlyMIRR,12)-1:NaN;
-  const VPL=disc.reduce((a,b)=>a+b,0),pb=payback(flows),pbd=payback(flows,monthlyW),stableRev=n('ordersStable')*n('ticket')*n('days'),fixed0=totalPayroll+n('proLabore')+n('rent')+n('occupancyExtra')+n('admin')+n('otherFixed'),stableEbitda=stableRev*mcRate-fixed0,stableFreeCash=stableEbitda-(n('financingMonths')>0?n('financingPayment'):0),breakEven=mcRate>0?fixed0/(n('ticket')*n('days')*mcRate):Infinity;
+  const VPL=disc.reduce((a,b)=>a+b,0),pb=payback(flows),pbd=payback(flows,monthlyW),stableRev=n('ordersStable')*n('ticket')*n('days'),fixed0=totalPayroll+n('proLabore')+n('rent')+n('occupancyExtra')+n('admin')+n('otherFixed'),stableMonth=Math.min(36,Math.max(7,Math.round(n('stableMonth')))),stableYear=Math.floor((stableMonth-1)/12),fixedAtStability=fixed0*Math.pow(1+pct('fixedInflation'),stableYear),stableEbitda=stableRev*mcRate-fixedAtStability,stableFinancing=stableMonth<=n('financingMonths')?n('financingPayment'):0,stableFreeCash=stableEbitda-stableFinancing,dailyContribution=n('ticket')*n('days')*mcRate,breakEven=dailyContribution>0?fixedAtStability/dailyContribution:NaN;
   document.getElementById('laborSummary').innerHTML=`<strong>Custo mensal da equipe:</strong> ${brl(totalPayroll)}<br><strong>Custo por funcionário:</strong> ${brl(laborPerEmployee)}<br><span style="color:#667085">Salário com encargos/provisões: ${brl(n('salary')*(1+pct('laborBurden')))} | Benefícios líquidos para a empresa: ${brl(n('meal')+n('insurance')+employerVT)}</span>`;
   document.getElementById('staffingCardCost').textContent=brl(totalPayroll);
   document.getElementById('staffingCardHint').textContent=`${num(n('employees'))} funcionários × ${brl(laborPerEmployee)} por funcionário`;
-  const data=[['Investimento total',brl(-initial),'CAPEX + capital de giro'],['Receita mensal estabilizada',brl(stableRev),`${num(n('ordersStable'))} pedidos/dia`],['EBITDA mensal estabilizado',brl(stableEbitda),`Após pró-labore de ${brl(n('proLabore'))}`],['Caixa livre mensal estabilizado',brl(stableFreeCash),`Após parcela financeira de ${brl(n('financingPayment'))}`],['Ponto de equilíbrio',num(breakEven)+' pedidos/dia','Cobertura das despesas operacionais fixas'],['VPL',brl(VPL),`WACC de ${per(annualW)}`],['TIR anual',per(annualIRR),'Retorno implícito do fluxo livre'],['MTIR anual',per(annualMIRR),'Financiamento e reinvestimento pelo WACC'],['Payback simples',isFinite(pb)?num(pb)+' meses':'Não atingido','Fluxo livre nominal'],['Payback descontado',isFinite(pbd)?num(pbd)+' meses':'Não atingido','Fluxo livre descontado pelo WACC']];
+  const data=[['Investimento total',brl(-initial),'CAPEX + capital de giro'],['Receita mensal estabilizada',brl(stableRev),`${num(n('ordersStable'))} pedidos/dia`],['EBITDA mensal estabilizado',brl(stableEbitda),`Após pró-labore de ${brl(n('proLabore'))}`],['Caixa livre mensal estabilizado',brl(stableFreeCash),stableFinancing?`Após parcela de ${brl(stableFinancing)}; financiamento ativo no mês de estabilização`:'Financiamento encerrado no mês de estabilização'],['Ponto de equilíbrio',isFinite(breakEven)?num(breakEven)+' pedidos/dia':'Não calculável','Despesas fixas no mês de estabilização ÷ contribuição por pedido/dia'],['VPL',brl(VPL),`WACC de ${per(annualW)}`],['TIR anual',per(annualIRR),'Retorno implícito do fluxo livre'],['MTIR anual',per(annualMIRR),'Financiamento e reinvestimento pelo WACC'],['Payback simples',isFinite(pb)?num(pb)+' meses':'Não atingido','Fluxo livre nominal'],['Payback descontado',isFinite(pbd)?num(pbd)+' meses':'Não atingido','Fluxo livre descontado pelo WACC']];
   document.getElementById('kpis').innerHTML=[data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[8]].map(x=>`<div class="kpi"><div class="label">${x[0]}</div><div class="value">${x[1]}</div><div class="hint">${x[2]}</div></div>`).join('');
   document.getElementById('scenarioText').textContent=`Cenário recalculado com margem de contribuição de ${per(mcRate)}, WACC de ${per(annualW)} e horizonte de ${M} meses.`;
   document.getElementById('summaryBody').innerHTML=data.map(x=>`<tr><td>${x[0]}</td><td><strong>${x[1]}</strong></td><td>${x[2]}</td></tr>`).join('');
-  let val=[];val.push([VPL>0?'ok':'bad',VPL>0?'VPL positivo':'VPL negativo',VPL>0?'O projeto supera o WACC nas premissas atuais.':'O projeto não remunera o WACC nas premissas atuais.']);val.push([annualIRR>annualW?'ok':'bad','TIR versus WACC',annualIRR>annualW?`TIR ${per(annualIRR)} acima do WACC ${per(annualW)}.`:`TIR ${per(annualIRR)} abaixo do WACC ${per(annualW)}.`]);val.push([breakEven<=n('ordersStable')?'ok':'bad','Volume de equilíbrio',`${num(breakEven)} pedidos/dia versus ${num(n('ordersStable'))} estabilizados.`]);val.push([varRate<.6?'warn':'bad','Custos variáveis',`${per(varRate)} da receita; margem de contribuição de ${per(mcRate)}.`]);
+  let val=[];val.push([VPL>0?'ok':'bad',VPL>0?'VPL positivo':'VPL negativo',VPL>0?'O projeto supera o WACC nas premissas atuais.':'O projeto não remunera o WACC nas premissas atuais.']);if(isFinite(annualIRR)){val.push([annualIRR>annualW?'ok':'bad','TIR versus WACC',annualIRR>annualW?`TIR ${per(annualIRR)} acima do WACC ${per(annualW)}.`:`TIR ${per(annualIRR)} abaixo do WACC ${per(annualW)}.`])}else{val.push(['warn','TIR versus WACC','TIR não calculável nas premissas atuais.'])}if(isFinite(breakEven)){val.push([breakEven<=n('ordersStable')?'ok':'bad','Volume de equilíbrio',`${num(breakEven)} pedidos/dia versus ${num(n('ordersStable'))} estabilizados.`])}else{val.push(['warn','Volume de equilíbrio','Não calculável com margem de contribuição, ticket ou dias de operação atuais.'])}val.push([varRate<.6?'warn':'bad','Custos variáveis',`${per(varRate)} da receita; margem de contribuição de ${per(mcRate)}.`]);
   document.getElementById('validation').innerHTML=val.map(x=>`<div style="margin:11px 0"><span class="status ${x[0]}">${x[1]}</span><div style="font-size:12px;color:#667085;margin-top:5px">${x[2]}</div></div>`).join('');
   document.getElementById('monthlyBody').innerHTML=rows.map(r=>`<tr><td>M${r.m}</td><td>${num(r.orders)}</td><td>${brl(r.rev)}</td><td>${brl(r.variable)}</td><td>${brl(r.mc)}</td><td>${brl(r.fixed)}</td><td class="${r.ebitda<0?'negative':''}">${brl(r.ebitda)}</td><td class="negative">-${brl(r.financing)}</td><td class="${r.freeCash<0?'negative':''}">${brl(r.freeCash)}</td><td class="${r.cum<0?'negative':''}">${brl(r.cum)}</td></tr>`).join('');
-  let years=[];for(let y=0;y<5;y++){let rs=rows.slice(y*12,(y+1)*12),sum=k=>rs.reduce((a,r)=>a+r[k],0);years.push({rev:sum('rev'),variable:sum('variable'),mc:sum('mc'),fixed:sum('fixed'),ebitda:sum('ebitda'),financing:sum('financing'),freeCash:sum('freeCash')})}
+  const yearCount=Math.ceil(M/12);document.getElementById('dreHead').innerHTML='<th>Conta</th>'+Array.from({length:yearCount},(_,i)=>`<th>Ano ${i+1}</th>`).join('');let years=[];for(let y=0;y<yearCount;y++){let rs=rows.slice(y*12,Math.min((y+1)*12,M)),sum=k=>rs.reduce((a,r)=>a+r[k],0);years.push({rev:sum('rev'),variable:sum('variable'),mc:sum('mc'),fixed:sum('fixed'),ebitda:sum('ebitda'),financing:sum('financing'),freeCash:sum('freeCash')})}
   let dre=[['Receita bruta','rev'],['(-) Custos variáveis','variable',true],['Margem de contribuição','mc'],['(-) Despesas fixas','fixed',true],['EBITDA operacional','ebitda'],['(-) Parcelas de financiamento','financing',true],['Caixa livre','freeCash']];document.getElementById('dreBody').innerHTML=dre.map(d=>`<tr><td>${d[0]}</td>${years.map(y=>`<td class="${d[2]?'negative':''}">${d[2]?'-':''}${brl(y[d[1]])}</td>`).join('')}</tr>`).join('');
   let max=Math.max(...flows.map(Math.abs),1);document.getElementById('cashChart').innerHTML=flows.map((f,i)=>{let h=Math.max(2,Math.abs(f)/max*220);return `<div class="bar ${f<0?'neg':''}" style="height:${h}px" data-tip="M${i}: ${brl(f)}"></div>`}).join('');
   saveConfig();
