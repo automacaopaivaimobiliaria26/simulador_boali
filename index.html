@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulador BP | Franquia Boali</title>
+<style>
+:root{--green:#0f5132;--green2:#198754;--lime:#dff3e7;--orange:#ee7b31;--ink:#17212b;--muted:#667085;--bg:#f4f7f5;--card:#fff;--line:#dfe7e2;--red:#b42318;--yellow:#a15c00;--blue:#175cd3}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(125deg,#083b28,#0f6742);color:#fff;padding:30px 5vw 26px;border-bottom:5px solid var(--orange)}
+header h1{margin:0 0 8px;font-size:clamp(25px,4vw,40px)}header p{margin:0;color:#d9efe5;max-width:950px;line-height:1.5}
+main{max-width:1500px;margin:auto;padding:24px}.grid{display:grid;grid-template-columns:390px 1fr;gap:22px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:15px;box-shadow:0 5px 20px rgba(20,50,35,.06);padding:20px;margin-bottom:20px}
+.card h2{margin:0 0 6px;color:var(--green);font-size:20px}.sub{color:var(--muted);font-size:13px;margin:0 0 16px;line-height:1.4}
+.group{border-top:1px solid var(--line);padding-top:15px;margin-top:15px}.group h3{font-size:14px;margin:0 0 12px;color:#344054;text-transform:uppercase;letter-spacing:.06em}
+.field{display:grid;grid-template-columns:1fr 125px;gap:12px;align-items:center;margin:9px 0}.field label{font-size:13px;line-height:1.25}.input-wrap{position:relative}.input-wrap span{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px}.input-wrap input{width:100%;padding:9px 8px 9px 31px;border:1px solid #cbd5cf;border-radius:8px;font-weight:600;background:#fcfdfc}.input-wrap input.pct{padding-left:8px;padding-right:27px}.input-wrap .suffix{left:auto;right:9px}.input-wrap input:focus{outline:2px solid #85c7a5;border-color:transparent}
+.actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}button{border:0;border-radius:9px;padding:10px 13px;font-weight:700;cursor:pointer}.primary{background:var(--green2);color:white}.secondary{background:#e9f2ed;color:var(--green)}.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(150px,1fr));gap:13px}.kpi{padding:16px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg,#fff,#fafcfb)}.kpi .label{font-size:12px;color:var(--muted);min-height:30px}.kpi .value{font-size:21px;font-weight:800;margin-top:5px;color:var(--green)}.kpi .hint{font-size:11px;color:var(--muted);margin-top:5px}
+.status{display:inline-flex;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800}.ok{background:#dcfae6;color:#067647}.warn{background:#fef0c7;color:#93370d}.bad{background:#fee4e2;color:#b42318}
+.chart{height:270px;display:flex;align-items:flex-end;gap:3px;padding:18px 4px 28px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}.bar{flex:1;min-width:3px;background:linear-gradient(180deg,#54ad7c,#147548);border-radius:3px 3px 0 0;position:relative}.bar.neg{background:linear-gradient(180deg,#ef8b83,#b42318)}.bar:hover:after{content:attr(data-tip);position:absolute;z-index:3;bottom:102%;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:5px 7px;border-radius:6px;font-size:10px;white-space:nowrap}.axisnote{font-size:11px;color:var(--muted);margin-top:7px}
+.table-wrap{overflow:auto;max-height:440px;border:1px solid var(--line);border-radius:10px}table{border-collapse:collapse;width:100%;font-size:12px}th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}th:first-child,td:first-child{text-align:left}thead th{position:sticky;top:0;background:#eaf3ee;color:#184c35;z-index:1}tbody tr:hover{background:#fafcfb}.negative{color:var(--red)}
+.note{padding:13px;border-radius:10px;background:#fff8eb;border-left:4px solid var(--orange);font-size:12px;line-height:1.5;color:#684009}.formula{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;background:#f5f7f6;padding:2px 5px;border-radius:5px}.footer{font-size:11px;color:var(--muted);line-height:1.5}.section-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:20px}
+.save-status{font-size:11px;color:var(--muted);margin-top:8px;display:flex;align-items:center;gap:6px}.save-status.saved{color:#067647}.save-status.saving{color:var(--orange)}
+@media(max-width:1050px){.grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}.section-grid{grid-template-columns:1fr}}
+@media(max-width:620px){main{padding:12px}.kpis{grid-template-columns:1fr}.field{grid-template-columns:1fr 120px}}
+@media print{.grid{display:block}.inputs,.actions{display:none}.card{box-shadow:none;break-inside:avoid}.table-wrap{max-height:none;overflow:visible}header{padding:18px}}
+</style>
+</head>
+<body>
+<header><h1>Simulador de Business Plan | Franquia Boali</h1><p>Modelo financeiro operacional de 60 meses, com premissas editáveis, recálculo automático, fluxo de caixa, DRE, sensibilidade e indicadores de retorno. Cenário inicial: loja de shopping de 40 m².</p></header>
+<main>
+<div class="grid">
+<aside class="inputs">
+<div class="card"><h2>Premissas editáveis</h2><p class="sub">Altere qualquer campo. Todos os resultados são recalculados automaticamente. As alterações são salvas automaticamente no navegador.</p>
+<div class="group"><h3>Investimento e avaliação</h3>
+<div class="field"><label>CAPEX e implantação</label><div class="input-wrap"><span>R$</span><input id="capex" type="number" value="362000" step="1000"></div></div>
+<div class="field"><label>Capital de giro inicial</label><div class="input-wrap"><span>R$</span><input id="workingCapital" type="number" value="30000" step="1000"></div></div>
+<div class="field"><label>WACC anual</label><div class="input-wrap"><input class="pct" id="wacc" type="number" value="18" step="0.5"><span class="suffix">%</span></div></div>
+<div class="field"><label>Horizonte da análise</label><div class="input-wrap"><input id="months" type="number" value="60" min="12" max="120" step="12"><span class="suffix">meses</span></div></div>
+<div class="field"><label>Valor residual no final</label><div class="input-wrap"><span>R$</span><input id="residual" type="number" value="0" step="1000"></div></div>
+<div class="field"><label>Recuperação do giro</label><div class="input-wrap"><input class="pct" id="wcRecovery" type="number" value="0" step="10"><span class="suffix">%</span></div></div>
+</div>
+<div class="group"><h3>Receita e ramp-up</h3>
+<div class="field"><label>Ticket médio</label><div class="input-wrap"><span>R$</span><input id="ticket" type="number" value="35" step="0.5"></div></div>
+<div class="field"><label>Dias de operação/mês</label><div class="input-wrap"><input id="days" type="number" value="26" min="1" max="31"></div></div>
+<div class="field"><label>Pedidos/dia no M1</label><div class="input-wrap"><input id="orders1" type="number" value="20"></div></div>
+<div class="field"><label>Pedidos/dia no M6</label><div class="input-wrap"><input id="orders6" type="number" value="154"></div></div>
+<div class="field"><label>Pedidos/dia estabilizado</label><div class="input-wrap"><input id="ordersStable" type="number" value="200"></div></div>
+<div class="field"><label>Mês de estabilização</label><div class="input-wrap"><input id="stableMonth" type="number" value="8" min="2" max="36"></div></div>
+<div class="field"><label>Crescimento anual após estabilização</label><div class="input-wrap"><input class="pct" id="growth" type="number" value="0" step="0.5"><span class="suffix">%</span></div></div>
+</div>
+<div class="group"><h3>Custos variáveis</h3>
+<div class="field"><label>Ingredientes e embalagens</label><div class="input-wrap"><input class="pct" id="cmv" type="number" value="32" step="0.5"><span class="suffix">%</span></div></div>
+<div class="field"><label>Impostos sobre vendas</label><div class="input-wrap"><input class="pct" id="tax" type="number" value="8" step="0.5"><span class="suffix">%</span></div></div>
+<div class="field"><label>Royalties</label><div class="input-wrap"><input class="pct" id="royalties" type="number" value="6" step="0.5"><span class="suffix">%</span></div></div>
+<div class="field"><label>Fundo cooperado marketing</label><div class="input-wrap"><input class="pct" id="marketing" type="number" value="3" step="0.5"><span class="suffix">%</span></div></div>
+<div class="field"><label>Marketing local adicional</label><div class="input-wrap"><input class="pct" id="localMarketing" type="number" value="1" step="0.5"><span class="suffix">%</span></div></div>
+<div class="field"><label>Pagamentos e delivery</label><div class="input-wrap"><input class="pct" id="payment" type="number" value="3" step="0.5"><span class="suffix">%</span></div></div>
+</div>
+<div class="group"><h3>Despesas fixas mensais</h3>
+<div class="field"><label>Quantidade de funcionários</label><div class="input-wrap"><input id="employees" type="number" value="7" min="0" max="100" step="1"></div></div>
+<div class="field"><label>Salário-base por funcionário</label><div class="input-wrap"><span>R$</span><input id="salary" type="number" value="2500" step="100"></div></div>
+<div class="field"><label>Alimentação/refeição por funcionário</label><div class="input-wrap"><span>R$</span><input id="meal" type="number" value="600" step="50"></div></div>
+<div class="field"><label>Seguro mensal por funcionário</label><div class="input-wrap"><span>R$</span><input id="insurance" type="number" value="30" step="10"></div></div>
+<div class="field"><label>Vale-transporte por dia</label><div class="input-wrap"><span>R$</span><input id="transportDay" type="number" value="8" step="1"></div></div>
+<div class="field"><label>Dias de VT por funcionário</label><div class="input-wrap"><input id="transportDays" type="number" value="26" min="0" max="31"></div></div>
+<div class="field"><label>Encargos e provisões sobre salário</label><div class="input-wrap"><input class="pct" id="laborBurden" type="number" value="56.8" step="0.5"><span class="suffix">%</span></div></div>
+<div class="field"><label>Desconto do funcionário no VT</label><div class="input-wrap"><input class="pct" id="vtDiscount" type="number" value="0" min="0" max="6" step="1"><span class="suffix">%</span></div></div>
+<div class="note" id="laborSummary" style="margin:12px 0"></div>
+<div class="field"><label>Pró-labore mensal</label><div class="input-wrap"><span>R$</span><input id="proLabore" type="number" value="8000" step="500"></div></div>
+<div class="field"><label>Parcela mensal de financiamento</label><div class="input-wrap"><span>R$</span><input id="financingPayment" type="number" value="5000" step="500"></div></div>
+<div class="field"><label>Prazo do financiamento</label><div class="input-wrap"><input id="financingMonths" type="number" value="60" min="0" max="120" step="1"><span class="suffix">meses</span></div></div>
+<div class="field"><label>Aluguel base</label><div class="input-wrap"><span>R$</span><input id="rent" type="number" value="7000" step="500"></div></div>
+<div class="field"><label>Condomínio, fundo e IPTU</label><div class="input-wrap"><span>R$</span><input id="occupancyExtra" type="number" value="0" step="500"></div></div>
+<div class="field"><label>Utilidades, manutenção e adm.</label><div class="input-wrap"><span>R$</span><input id="admin" type="number" value="8000" step="500"></div></div>
+<div class="field"><label>Seguro, sistema e outros</label><div class="input-wrap"><span>R$</span><input id="otherFixed" type="number" value="0" step="500"></div></div>
+<div class="field"><label>Reajuste anual dos custos fixos</label><div class="input-wrap"><input class="pct" id="fixedInflation" type="number" value="0" step="0.5"><span class="suffix">%</span></div></div>
+</div>
+<div class="actions">
+<button class="primary" onclick="calculate()">Recalcular</button>
+<button class="secondary" onclick="resetModel()">Restaurar cenário inicial</button>
+<button class="secondary" onclick="exportConfig()">Exportar configuração</button>
+<button class="ghost" onclick="document.getElementById('importFile').click()">Importar configuração</button>
+<button class="secondary" onclick="window.print()">Imprimir / PDF</button>
+<input type="file" id="importFile" accept=".json" style="display:none" onchange="importConfig(event)">
+</div>
+<div class="save-status" id="saveStatus"></div>
+</div></aside>
+<section>
+<div class="card"><h2>Resumo executivo</h2><p class="sub" id="scenarioText"></p><div class="kpis" id="kpis"></div></div>
+<div class="section-grid">
+<div class="card"><h2>Fluxo de caixa mensal</h2><p class="sub">Barras representam o caixa livre após despesas operacionais, pró-labore e parcelas do financiamento, incluindo o desembolso inicial no mês zero.</p><div class="chart" id="cashChart"></div><div class="axisnote">Passe o cursor sobre uma barra para ver o mês e o valor.</div></div>
+<div class="card"><h2>Validação econômica</h2><p class="sub">Sinalização baseada nos indicadores calculados.</p><div id="validation"></div></div>
+</div>
+<div class="card"><h2>Dimensionamento recomendado da equipe</h2><p class="sub">Estrutura-base para loja de shopping de 40 m², operação 5x2, 26 dias/mês e capacidade projetada de até 200 pedidos/dia. A quantidade total permanece editável nas premissas.</p>
+<div class="table-wrap" style="max-height:none"><table><thead><tr><th>Cargo</th><th>Quantidade-base</th><th>Responsabilidade principal</th></tr></thead><tbody>
+<tr><td>Gerente / líder de loja</td><td>1</td><td>Gestão, abertura e fechamento, estoque, escala, controles e apoio nos picos</td></tr>
+<tr><td>Auxiliar de cozinha / produção</td><td>3</td><td>Pré-preparo, produção, montagem, reposição e higiene da cozinha</td></tr>
+<tr><td>Atendente / operador de loja</td><td>2</td><td>Caixa, balcão, retirada, organização dos pedidos e apoio ao delivery</td></tr>
+<tr><td>Auxiliar multifuncional / apoio</td><td>1</td><td>Cobertura de folgas, picos, produção, atendimento e apoio operacional</td></tr>
+<tr><td><strong>Total recomendado</strong></td><td><strong>7</strong></td><td>Premissa-base utilizada no cenário inicial do simulador</td></tr>
+</tbody></table></div>
+<div class="kpis" style="margin-top:14px">
+<div class="kpi"><div class="label">Cenário otimizado</div><div class="value">6 funcionários</div><div class="hint">Menor folga para faltas, férias e picos</div></div>
+<div class="kpi"><div class="label">Cenário-base</div><div class="value">7 funcionários</div><div class="hint">Premissa recomendada para o BP</div></div>
+<div class="kpi"><div class="label">Cenário conservador</div><div class="value">8 funcionários</div><div class="hint">Maior cobertura operacional</div></div>
+<div class="kpi"><div class="label">Custo atual da equipe</div><div class="value" id="staffingCardCost">R$ 0</div><div class="hint" id="staffingCardHint">Calculado automaticamente</div></div>
+</div>
+<div class="note" style="margin-top:14px"><strong>Observação:</strong> a composição por cargo é a recomendação operacional do cenário-base. Ao alterar a quantidade total de funcionários, o custo financeiro é recalculado automaticamente, mas a redistribuição dos cargos deve ser ajustada manualmente conforme horário do shopping, picos de almoço/jantar e convenção coletiva aplicável.</div></div>
+<div class="card"><h2>DRE anual projetada</h2><p class="sub">Visão operacional. Não contempla depreciação, juros segregados ou IR/CSLL sobre o lucro. As parcelas do financiamento são apresentadas abaixo do EBITDA para formar o caixa livre.</p><div class="table-wrap"><table><thead><tr><th>Conta</th><th>Ano 1</th><th>Ano 2</th><th>Ano 3</th><th>Ano 4</th><th>Ano 5</th></tr></thead><tbody id="dreBody"></tbody></table></div></div>
+<div class="card"><h2>Projeção mensal</h2><p class="sub">Detalhamento de volume, receita, margem de contribuição, despesas fixas e fluxo de caixa.</p><div class="table-wrap"><table><thead><tr><th>Mês</th><th>Pedidos/dia</th><th>Receita</th><th>Custos variáveis</th><th>Margem contribuição</th><th>Despesas fixas</th><th>EBITDA</th><th>Parcela financiamento</th><th>Caixa livre</th><th>Caixa acumulado</th></tr></thead><tbody id="monthlyBody"></tbody></table></div></div>
+<div class="card"><h2>Resumo dos indicadores financeiros</h2><div class="table-wrap"><table><thead><tr><th>Indicador</th><th>Resultado</th><th>Critério / interpretação</th></tr></thead><tbody id="summaryBody"></tbody></table></div>
+<div class="note" style="margin-top:14px"><strong>Critério do modelo:</strong> VPL descontado pelo WACC; TIR calculada sobre os fluxos mensais e anualizada; MTIR usa o WACC tanto como taxa de financiamento quanto como taxa de reinvestimento; payback simples usa fluxo nominal e payback descontado usa fluxo trazido a valor presente. Caso o retorno não aconteça dentro do horizonte, o indicador mostra "Não atingido".</div></div>
+<div class="card footer"><strong>Escopo e fontes do cenário inicial.</strong> Premissas financeiras baseadas na COF Boali de 01/02/2026 e no resumo de premissas fornecido. CAPEX de R$ 362 mil e capital de giro de R$ 30 mil para loja de shopping de 40 m²; royalties de 6%; fundo de marketing de 3%; prazo de 5 anos. O marketing local foi iniciado em 1% para refletir a recomendação contratual identificada na validação. O cenário inicial utiliza 7 funcionários, distribuídos em 1 gerente/líder, 3 auxiliares de cozinha/produção, 2 atendentes/operadores e 1 auxiliar multifuncional. As demais premissas são editáveis e precisam ser confirmadas com orçamento do ponto, dados da franqueadora e pesquisa de demanda. Este simulador é ferramenta gerencial e não representa garantia de rentabilidade.</div>
+</section></div></main>
+<script>
+const STORAGE_KEY='boali_bp_config_v1';
+const defaults={capex:362000,workingCapital:30000,wacc:18,months:60,residual:0,wcRecovery:0,ticket:35,days:26,orders1:20,orders6:154,ordersStable:200,stableMonth:8,growth:0,cmv:32,tax:8,royalties:6,marketing:3,localMarketing:1,payment:3,employees:7,salary:2500,meal:600,insurance:30,transportDay:8,transportDays:26,laborBurden:56.8,vtDiscount:0,proLabore:8000,financingPayment:5000,financingMonths:60,rent:7000,occupancyExtra:0,admin:8000,otherFixed:0,fixedInflation:0};
+const ids=Object.keys(defaults);
+const n=id=>Number(document.getElementById(id).value)||0;
+const pct=id=>n(id)/100;
+const brl=v=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}).format(v);
+const per=v=>isFinite(v)?new Intl.NumberFormat('pt-BR',{style:'percent',minimumFractionDigits:1,maximumFractionDigits:1}).format(v):'Não calculável';
+const num=v=>new Intl.NumberFormat('pt-BR',{maximumFractionDigits:1}).format(v);
+
+function npv(rate,flows){return flows.reduce((a,v,i)=>a+v/Math.pow(1+rate,i),0)}
+function irr(flows){let lo=-.9999,hi=10; if(!flows.some(x=>x<0)||!flows.some(x=>x>0))return NaN; let fLo=npv(lo,flows),fHi=npv(hi,flows); if(fLo*fHi>0)return NaN; for(let i=0;i<250;i++){let mid=(lo+hi)/2,f=npv(mid,flows); if(Math.abs(f)<1e-8)return mid;if(fLo*f<=0){hi=mid;fHi=f}else{lo=mid;fLo=f}}return(lo+hi)/2}
+function mirr(flows,finance,reinvest){const N=flows.length-1;let pvNeg=0,fvPos=0;flows.forEach((v,i)=>{if(v<0)pvNeg+=v/Math.pow(1+finance,i);else fvPos+=v*Math.pow(1+reinvest,N-i)});if(pvNeg===0||fvPos<=0)return NaN;return Math.pow(fvPos/-pvNeg,1/N)-1}
+function payback(flows,discount=0){let cum=0;for(let i=0;i<flows.length;i++){let f=flows[i]/Math.pow(1+discount,i),prev=cum;cum+=f;if(cum>=0&&i>0){let frac=(-prev)/(f||1);return(i-1)+Math.max(0,Math.min(1,frac))}}return NaN}
+function orderRamp(m){const a=n('orders1'),b=n('orders6'),c=n('ordersStable'),sm=Math.max(7,n('stableMonth'));if(m<=1)return a;if(m<=6)return a+(b-a)*(m-1)/5;if(m<sm)return b+(c-b)*(m-6)/(sm-6);let annual=Math.floor((m-sm)/12);return c*Math.pow(1+pct('growth'),annual)}
+
+function loadConfig(){
+  try{
+    const stored=localStorage.getItem(STORAGE_KEY);
+    if(stored){
+      const cfg=JSON.parse(stored);
+      ids.forEach(id=>{if(cfg[id]!==undefined) document.getElementById(id).value=cfg[id];});
+      showSaveStatus('Configuração carregada do navegador', 'saved');
+    }else{
+      showSaveStatus('Usando cenário inicial', 'saved');
+    }
+  }catch(e){
+    console.warn('Erro ao carregar configuração:',e);
+    showSaveStatus('Erro ao carregar; usando cenário inicial', 'saving');
+  }
+}
+
+function saveConfig(){
+  try{
+    const cfg={};
+    ids.forEach(id=>{cfg[id]=document.getElementById(id).value;});
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(cfg));
+    showSaveStatus('Salvo automaticamente', 'saved');
+  }catch(e){
+    console.warn('Erro ao salvar configuração:',e);
+    showSaveStatus('Erro ao salvar', 'saving');
+  }
+}
+
+function showSaveStatus(msg,type){
+  const el=document.getElementById('saveStatus');
+  el.textContent=msg;
+  el.className='save-status '+type;
+}
+
+function exportConfig(){
+  const cfg={};
+  ids.forEach(id=>{cfg[id]=document.getElementById(id).value;});
+  cfg._meta={exportedAt:new Date().toISOString(),version:'6.0'};
+  const blob=new Blob([JSON.stringify(cfg,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download=`boali_bp_config_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showSaveStatus('Configuração exportada', 'saved');
+}
+
+function importConfig(event){
+  const file=event.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const cfg=JSON.parse(e.target.result);
+      let imported=0;
+      ids.forEach(id=>{if(cfg[id]!==undefined){document.getElementById(id).value=cfg[id];imported++;}});
+      calculate();
+      saveConfig();
+      showSaveStatus(`${imported} campos importados e salvos`, 'saved');
+    }catch(err){
+      showSaveStatus('Arquivo inválido', 'saving');
+    }
+    event.target.value='';
+  };
+  reader.readAsText(file);
+}
+
+function resetModel(){
+  if(!confirm('Restaurar todas as premissas para o cenário inicial?')) return;
+  ids.forEach(id=>document.getElementById(id).value=defaults[id]);
+  localStorage.removeItem(STORAGE_KEY);
+  calculate();
+  showSaveStatus('Cenário inicial restaurado', 'saved');
+}
+
+function calculate(){
+  const M=Math.max(12,Math.round(n('months'))),annualW=pct('wacc'),monthlyW=Math.pow(1+annualW,1/12)-1;
+  const varRate=['cmv','tax','royalties','marketing','localMarketing','payment'].reduce((a,x)=>a+pct(x),0),mcRate=1-varRate;
+  const grossVT=n('transportDay')*n('transportDays'),vtEmployee=Math.min(grossVT,n('salary')*pct('vtDiscount')),employerVT=Math.max(0,grossVT-vtEmployee),laborPerEmployee=n('salary')*(1+pct('laborBurden'))+n('meal')+n('insurance')+employerVT,totalPayroll=n('employees')*laborPerEmployee;
+  const initial=-(n('capex')+n('workingCapital'));let flows=[initial],disc=[initial],rows=[],cum=initial;
+  for(let m=1;m<=M;m++){let orders=orderRamp(m),rev=orders*n('ticket')*n('days'),variable=rev*varRate,year=Math.floor((m-1)/12),fixed=(totalPayroll+n('proLabore')+n('rent')+n('occupancyExtra')+n('admin')+n('otherFixed'))*Math.pow(1+pct('fixedInflation'),year),ebitda=rev-variable-fixed,financing=m<=n('financingMonths')?n('financingPayment'):0,freeCash=ebitda-financing;if(m===M)freeCash+=n('residual')+n('workingCapital')*pct('wcRecovery');flows.push(freeCash);disc.push(freeCash/Math.pow(1+monthlyW,m));cum+=freeCash;rows.push({m,orders,rev,variable,mc:rev-variable,fixed,ebitda,financing,freeCash,cum})}
+  const monthlyIRR=irr(flows),annualIRR=isFinite(monthlyIRR)?Math.pow(1+monthlyIRR,12)-1:NaN,monthlyMIRR=mirr(flows,monthlyW,monthlyW),annualMIRR=isFinite(monthlyMIRR)?Math.pow(1+monthlyMIRR,12)-1:NaN;
+  const VPL=disc.reduce((a,b)=>a+b,0),pb=payback(flows),pbd=payback(flows,monthlyW),stableRev=n('ordersStable')*n('ticket')*n('days'),fixed0=totalPayroll+n('proLabore')+n('rent')+n('occupancyExtra')+n('admin')+n('otherFixed'),stableEbitda=stableRev*mcRate-fixed0,stableFreeCash=stableEbitda-(n('financingMonths')>0?n('financingPayment'):0),breakEven=mcRate>0?fixed0/(n('ticket')*n('days')*mcRate):Infinity;
+  document.getElementById('laborSummary').innerHTML=`<strong>Custo mensal da equipe:</strong> ${brl(totalPayroll)}<br><strong>Custo por funcionário:</strong> ${brl(laborPerEmployee)}<br><span style="color:#667085">Salário com encargos/provisões: ${brl(n('salary')*(1+pct('laborBurden')))} | Benefícios líquidos para a empresa: ${brl(n('meal')+n('insurance')+employerVT)}</span>`;
+  document.getElementById('staffingCardCost').textContent=brl(totalPayroll);
+  document.getElementById('staffingCardHint').textContent=`${num(n('employees'))} funcionários × ${brl(laborPerEmployee)} por funcionário`;
+  const data=[['Investimento total',brl(-initial),'CAPEX + capital de giro'],['Receita mensal estabilizada',brl(stableRev),`${num(n('ordersStable'))} pedidos/dia`],['EBITDA mensal estabilizado',brl(stableEbitda),`Após pró-labore de ${brl(n('proLabore'))}`],['Caixa livre mensal estabilizado',brl(stableFreeCash),`Após parcela financeira de ${brl(n('financingPayment'))}`],['Ponto de equilíbrio',num(breakEven)+' pedidos/dia','Cobertura das despesas operacionais fixas'],['VPL',brl(VPL),`WACC de ${per(annualW)}`],['TIR anual',per(annualIRR),'Retorno implícito do fluxo livre'],['MTIR anual',per(annualMIRR),'Financiamento e reinvestimento pelo WACC'],['Payback simples',isFinite(pb)?num(pb)+' meses':'Não atingido','Fluxo livre nominal'],['Payback descontado',isFinite(pbd)?num(pbd)+' meses':'Não atingido','Fluxo livre descontado pelo WACC']];
+  document.getElementById('kpis').innerHTML=[data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[8]].map(x=>`<div class="kpi"><div class="label">${x[0]}</div><div class="value">${x[1]}</div><div class="hint">${x[2]}</div></div>`).join('');
+  document.getElementById('scenarioText').textContent=`Cenário recalculado com margem de contribuição de ${per(mcRate)}, WACC de ${per(annualW)} e horizonte de ${M} meses.`;
+  document.getElementById('summaryBody').innerHTML=data.map(x=>`<tr><td>${x[0]}</td><td><strong>${x[1]}</strong></td><td>${x[2]}</td></tr>`).join('');
+  let val=[];val.push([VPL>0?'ok':'bad',VPL>0?'VPL positivo':'VPL negativo',VPL>0?'O projeto supera o WACC nas premissas atuais.':'O projeto não remunera o WACC nas premissas atuais.']);val.push([annualIRR>annualW?'ok':'bad','TIR versus WACC',annualIRR>annualW?`TIR ${per(annualIRR)} acima do WACC ${per(annualW)}.`:`TIR ${per(annualIRR)} abaixo do WACC ${per(annualW)}.`]);val.push([breakEven<=n('ordersStable')?'ok':'bad','Volume de equilíbrio',`${num(breakEven)} pedidos/dia versus ${num(n('ordersStable'))} estabilizados.`]);val.push([varRate<.6?'warn':'bad','Custos variáveis',`${per(varRate)} da receita; margem de contribuição de ${per(mcRate)}.`]);
+  document.getElementById('validation').innerHTML=val.map(x=>`<div style="margin:11px 0"><span class="status ${x[0]}">${x[1]}</span><div style="font-size:12px;color:#667085;margin-top:5px">${x[2]}</div></div>`).join('');
+  document.getElementById('monthlyBody').innerHTML=rows.map(r=>`<tr><td>M${r.m}</td><td>${num(r.orders)}</td><td>${brl(r.rev)}</td><td>${brl(r.variable)}</td><td>${brl(r.mc)}</td><td>${brl(r.fixed)}</td><td class="${r.ebitda<0?'negative':''}">${brl(r.ebitda)}</td><td class="negative">-${brl(r.financing)}</td><td class="${r.freeCash<0?'negative':''}">${brl(r.freeCash)}</td><td class="${r.cum<0?'negative':''}">${brl(r.cum)}</td></tr>`).join('');
+  let years=[];for(let y=0;y<5;y++){let rs=rows.slice(y*12,(y+1)*12),sum=k=>rs.reduce((a,r)=>a+r[k],0);years.push({rev:sum('rev'),variable:sum('variable'),mc:sum('mc'),fixed:sum('fixed'),ebitda:sum('ebitda'),financing:sum('financing'),freeCash:sum('freeCash')})}
+  let dre=[['Receita bruta','rev'],['(-) Custos variáveis','variable',true],['Margem de contribuição','mc'],['(-) Despesas fixas','fixed',true],['EBITDA operacional','ebitda'],['(-) Parcelas de financiamento','financing',true],['Caixa livre','freeCash']];document.getElementById('dreBody').innerHTML=dre.map(d=>`<tr><td>${d[0]}</td>${years.map(y=>`<td class="${d[2]?'negative':''}">${d[2]?'-':''}${brl(y[d[1]])}</td>`).join('')}</tr>`).join('');
+  let max=Math.max(...flows.map(Math.abs),1);document.getElementById('cashChart').innerHTML=flows.map((f,i)=>{let h=Math.max(2,Math.abs(f)/max*220);return `<div class="bar ${f<0?'neg':''}" style="height:${h}px" data-tip="M${i}: ${brl(f)}"></div>`}).join('');
+  saveConfig();
+}
+
+ids.forEach(id=>document.getElementById(id).addEventListener('input',calculate));
+loadConfig();
+calculate();
+</script>
+</body></html>
