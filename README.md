@@ -1,7 +1,5 @@
-# Simulador Boali — versão revisada
+# Simulador Boali — XLSX corrigido
 
-Pacote estático para EasyPanel: index.html, Dockerfile e nginx.conf. Nginx atende em `/simuladorboali` pela porta interna 8080.
+A exportação gera um arquivo `.xlsx` Open XML válido, não um XML renomeado para `.xls`. A aba Premissas alimenta projeções mensais, DRE anual (valor e percentual por ano e total do período) e indicadores por fórmulas. O Excel recalcula as fórmulas ao abrir ou recalcular a pasta.
 
-A exportação Excel (`.xls`, SpreadsheetML) possui aba Premissas editável. A projeção mensal, DRE anual e indicadores de VPL, TIR e MTIR usam fórmulas vinculadas às premissas para recálculo no Excel. A DRE anual mostra valor e percentual sobre a receita de cada ano, mais total do período e percentual sobre a receita total.
-
-As premissas salvas na página ficam no localStorage do navegador e não são sincronizadas entre dispositivos. O modelo considera CAPEX e capital de giro desembolsados no mês zero; subtrai as parcelas sem lançar o principal financiado como entrada. A DRE não contempla depreciação, juros segregados ou IR/CSLL.
+A aplicação continua estática; o Nginx atende `/simuladorboali` na porta interna 8080. As premissas da página são salvas no localStorage do navegador. O fluxo considera CAPEX e giro pagos no mês zero e abate parcelas sem entrada do principal financiado. A DRE não inclui depreciação, juros segregados ou IR/CSLL.
